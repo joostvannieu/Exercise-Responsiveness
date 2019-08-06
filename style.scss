@@ -1,0 +1,136 @@
+/*=== set screen sizes ===*/
+$small-screen-width-min: 0;
+$medium-screen-width-min: 600px;
+$large-screen-width-min: 768px;
+
+/*=== mixin to select viewport width ===*/
+@mixin viewport-size-selector($vh-width){
+  @if $vh-width==$small-screen-width-min{
+    @media (min-width: $small-screen-width-min) {
+      @content;
+    }
+  }
+  @if $vh-width==$medium-screen-width-min{
+    @media (min-width: $medium-screen-width-min) {
+      @content;
+    }
+  }
+  @if $vh-width==$large-screen-width-min{
+    @media (min-width: $large-screen-width-min) {
+      @content;
+    }
+  }
+}
+
+body{
+  width: 80%;
+  margin:auto;
+}
+
+/*=== set visibility depending on viewport size ===*/
+#small{
+  /*display: none;*/
+  @include viewport-size-selector($small-screen-width-min){
+    display: contents;
+  }
+  @include viewport-size-selector($medium-screen-width-min){
+    /*display: none;*/
+  }
+}
+#medium{
+  /*display: none;*/
+  @include viewport-size-selector($medium-screen-width-min){
+    display: contents;
+  }
+  @include viewport-size-selector($large-screen-width-min){
+    /*display: none;*/
+  }
+}
+#large{
+  /*display: none;*/
+  @include viewport-size-selector($large-screen-width-min){
+    display: contents;
+  }
+}
+
+/*=== set the background color of the page depending on viewport width ===*/
+@include viewport-size-selector($small-screen-width-min){
+  body {background-color: red;}
+}
+@include viewport-size-selector($medium-screen-width-min){
+  body {background-color: green;}
+}
+@include viewport-size-selector($large-screen-width-min){
+  body {background-color: blue;}
+}
+
+/*=== set the flow of the page depending on viewport width ===*/
+/*
+@include viewport-size-selector($small-screen-width-min){
+  .content{
+    max-width: 100%;
+  }
+}
+@include viewport-size-selector($medium-screen-width-min){
+  #small, #medium{
+    max-width: 50%;
+    display: inline-block;
+    float: left;
+  }
+  #large{
+    max-width: 100%;
+  }
+}
+@include viewport-size-selector($large-screen-width-min){
+  .content{
+    width: 1/3vw;
+  }
+}
+
+/*
+@media screen and (max-width: 300px){
+  body{
+    background-color: red;
+  }
+  #small{
+    display: contents;
+  }
+  #medium{
+    display: none;
+  }
+  #large{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 300px){
+  body{
+    background-color: green;
+  }
+  #small{
+    display: none;
+  }
+  #medium{
+    display: contents;
+  }
+  #large{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px){
+  body{
+    background-color: blue;
+  }
+  #small{
+    display: none;
+  }
+  #medium {
+    display: none;
+  }
+  #large{
+    display: contents;
+  }
+}
+
+ */
